@@ -56,11 +56,13 @@
 <body>
     <div class="card">
         <h1>Student information</h1>
-        <div class="row"><span class="label">Full Name: </span> {{ full_name }}</div>
-        <div class="row"><span class="label">Student ID: </span> {{ student_id }}</div>
-        <div class="row"><span class="label">Address: </span> {{ address }}</div>
-        <div class="row"><span class="label">Email Address: </span> {{ email }}</div>
+        <div class="row"><span class="label">Full Name: </span> {{ first_name|capfirst|add:last_name }}</div>
+        <div class="row"><span class="label">Student ID: </span> {{ student_id|stringformat:"s" }}</div>
+        <div class="row"><span class="label">Address: </span> {{ address|upper }}</div>
+        <div class="row"><span class="label">Email Address: </span> {{ email|default:"No email provided" }}</div>
         <div class="row"><span class="label">Note: </span> {{ note }}</div>
+        <div class="row"><span class="label">Age: </span> {{ dob|timesince }}</div>
+
     </div>
 </body>
 
