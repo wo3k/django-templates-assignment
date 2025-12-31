@@ -1,69 +1,78 @@
-<!doctype html>
-<html lang="ar">
+<!DOCTYPE html>
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <title>personal information</title>
+    <title>Home Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            direction: rtl;
-            padding: 20px;
-            background-color: #f5f5dc;
+            background: #f4f6f8;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
         .card {
-            max-width: 700px;
+            background: #ffffff;
+            max-width: 600px;
             margin: auto;
-            padding: 20px;
-            border: 1px solid #e0d8b0;
-            border-radius: 10px;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo {
             text-align: center;
-            color: #333;
-            background: linear-gradient(135deg, #917b5e, #c19a6b);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
-        }
-
-        .card h1 {
-            font-size: 28px;
             margin-bottom: 20px;
-            color: #4e342e;
         }
 
-        .card .row {
-            font-size: 18px;
-            margin: 10px 0;
-            border-bottom: 1px solid #e0d8b0;
-            padding-bottom: 10px;
+        .photo img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            background-color: #ffffff;
+            border-radius: 50%;
+            border: 3px solid #ddd;
+            padding: 5px;
         }
 
-        .card .row:last-child {
-            border-bottom: none;
+
+        .info p {
+            font-size: 16px;
+            margin: 8px 0;
         }
 
         .label {
-            font-weight: 700;
+            font-weight: bold;
+            color: #333;
         }
     </style>
 </head>
 
 <body>
-    <div class="card">
-        <h1>Student information</h1>
-        <div class="row"><span class="label">Full Name: </span> {{ first_name|capfirst|add:last_name }}</div>
-        <div class="row"><span class="label">Student ID: </span> {{ student_id|stringformat:"s" }}</div>
-        <div class="row"><span class="label">Address: </span> {{ address|upper }}</div>
-        <div class="row"><span class="label">Email Address: </span> {{ email|default:"No email provided" }}</div>
-        <div class="row"><span class="label">Note: </span> {{ note }}</div>
-        <div class="row"><span class="label">Age: </span> {{ dob|timesince }}</div>
 
+    <h1>Person Information</h1>
+
+    {% for p in people %}
+    <div class="card">
+        <div class="photo">
+            <img src="{{ p.photo.url }}" alt="Photo">
+        </div>
+
+        <div class="info">
+            <p><span class="label">Full Name:</span> {{ p.full_name }}</p>
+            <p><span class="label">University ID:</span> {{ p.university_id }}</p>
+            <p><span class="label">Age:</span> {{ p.age }}</p>
+            <p><span class="label">Date of Birth:</span> {{ p.date_of_birth }}</p>
+            <p><span class="label">Address:</span> {{ p.address }}</p>
+            <p><span class="label">Salary:</span> {{ p.salary }}</p>
+        </div>
     </div>
+    {% endfor %}
+
 </body>
 
 </html>
